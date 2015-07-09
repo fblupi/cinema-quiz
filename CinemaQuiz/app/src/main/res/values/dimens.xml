@@ -1,0 +1,15 @@
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="button_height">36dp</dimen>
+    <dimen name="button_padding">8dp</dimen>
+    <dimen name="button_margin">4dp</dimen>
+    <dimen name="layout_padding">16dp</dimen>
+    <dimen name="layout_padding_narrow">12dp</dimen>
+    <dimen name="music_button_margin">12dp</dimen>
+    <dimen name="main_image_height">96dp</dimen>
+    <dimen name="main_image_margin">16dp</dimen>
+    <dimen name="button_elevation">5dp</dimen>
+    <dimen name="button_radius">2dp</dimen>
+    <dimen name="alert_dialog_min_width">200dp</dimen>
+</resources>

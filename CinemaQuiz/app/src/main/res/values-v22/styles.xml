@@ -1,0 +1,47 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@drawable/bg_repeat</item>
+        <item name="android:alertDialogTheme">@style/AppTheme.AlertDialogTheme</item>
+    </style>
+
+    <style name="AppTheme.AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorPrimaryUltraDark</item>
+        <item name="android:minWidth">200dp</item>
+    </style>
+    
+    <style name="Buttons">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@drawable/btn_default</item>
+        <item name="android:textColor">@color/buttonTextColor</item>
+        <item name="android:paddingLeft">@dimen/button_padding</item>
+        <item name="android:paddingRight">@dimen/button_padding</item>
+        <item name="android:layout_marginLeft">@dimen/button_margin</item>
+        <item name="android:layout_marginRight">@dimen/button_margin</item>
+        <item name="android:layout_marginBottom">@dimen/button_margin</item>
+        <item name="android:elevation">@dimen/button_elevation</item>
+    </style>
+
+    <style name="Buttons.Error">
+        <item name="android:background">@drawable/btn_error</item>
+    </style>
+
+    <style name="Buttons.Success">
+        <item name="android:background">@drawable/btn_success</item>
+    </style>
+
+    <style name="Buttons.Main">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Buttons.Small">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+</resources>
