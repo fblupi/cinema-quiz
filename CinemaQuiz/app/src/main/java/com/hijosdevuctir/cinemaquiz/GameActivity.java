@@ -6,16 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,18 +25,18 @@ public class GameActivity extends Activity {
     private int fallos; // número de fallos
     private int id; // id de la pregunta actual
     private int limite; // número de preguntas que se responderán
+    private int vidas;
+    private int modo; // modo de juego (0 normal, 1 con vidas)
     private Pregunta pregunta; // pregunta actual
+    private TextView nTiempo;
+    private TextView nVidas;
     private Button option0; // Botón primera opción
     private Button option1; // Botón segunda opción
     private Button option2; // Botón tercera opción
     private Button option3; // Botón cuarta opción
-    private ImageButton play; // Botón play
-    private ImageButton pause; // Botón pause
-    private ImageButton stop; // Botón stop
     private SoundPool soundPool; // Sonido de acierto o fallo
     private int spAciertoId; // Identificador de sonido de acierto
     private int spFalloId; // Identificador de sonido de fallo
-    private MediaPlayer mediaPlayer; // Sonido de música en preguntas
     private long mLastClickTime = 0; // Variable para controlar el tiempo entre pulsaciones
     private Results results = Results.getInstance(this);
 
@@ -50,11 +47,24 @@ public class GameActivity extends Activity {
         setContentView(R.layout.game_activity);
         Bundle extras = getIntent().getExtras(); // Se obtienen los parámetros recibidos
 
-        limite = extras.getInt("num"); // Se recoge el parámetro con el límite de preguntas
+        // Se busca el texto de tiempo y vidas
+        nTiempo = (TextView) findViewById(R.id.nTime);
+        nVidas = (TextView) findViewById(R.id.nLifes);
 
-        if(limite > Preguntas.size() || limite < 1) { // Número incorrecto de preguntas
-            limite = Preguntas.size(); // Se juegan todas las preguntas
-            Toast.makeText(this, R.string.question_readjustment, Toast.LENGTH_SHORT).show();
+        vidas = 5;
+        modo = extras.getInt("mod");
+
+        if(modo == 0) {
+            limite = extras.getInt("num"); // Se recoge el parámetro con el límite de preguntas
+            TextView tVidas = (TextView) findViewById(R.id.lifes);
+            tVidas.setVisibility(View.GONE);
+            nVidas.setVisibility(View.GONE);
+            if(limite > Preguntas.size() || limite < 1) { // Número incorrecto de preguntas
+                limite = Preguntas.size(); // Se juegan todas las preguntas
+                Toast.makeText(this, R.string.question_readjustment, Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            limite = Preguntas.size();
         }
 
         Preguntas.shuffle(); // Se barajan las preguntas
@@ -68,9 +78,6 @@ public class GameActivity extends Activity {
         option1 = (Button) findViewById(R.id.option1);
         option2 = (Button) findViewById(R.id.option2);
         option3 = (Button) findViewById(R.id.option3);
-        play = (ImageButton) findViewById(R.id.play);
-        pause = (ImageButton) findViewById(R.id.pause);
-        stop = (ImageButton) findViewById(R.id.stop);
 
         // Se crean los sonidos de acierto y fallo
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { // Usa el nuevo constructor
@@ -137,40 +144,6 @@ public class GameActivity extends Activity {
             }
         });
 
-        // Listener de los botones del reproductor
-        play.setOnClickListener(new View.OnClickListener() { // Play
-            @Override
-            public void onClick(View v) {
-                if (SystemClock.elapsedRealtime() - mLastClickTime < INTERVALO_CLICK) { // Se ha pulsado un botón hace menos de INTERVALO_CLICK milisegundos
-                    return;
-                }
-                mLastClickTime = SystemClock.elapsedRealtime(); // Se actualiza la última pulsación
-                playMusic();
-            }
-        });
-
-        pause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (SystemClock.elapsedRealtime() - mLastClickTime < INTERVALO_CLICK) { // Se ha pulsado un botón hace menos de INTERVALO_CLICK milisegundos
-                    return;
-                }
-                mLastClickTime = SystemClock.elapsedRealtime(); // Se actualiza la última pulsación
-                pauseMusic();
-            }
-        });
-
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (SystemClock.elapsedRealtime() - mLastClickTime < INTERVALO_CLICK) { // Se ha pulsado un botón hace menos de INTERVALO_CLICK milisegundos
-                    return;
-                }
-                mLastClickTime = SystemClock.elapsedRealtime(); // Se actualiza la última pulsación
-                stopMusic();
-            }
-        });
-
     }
 
     @Override
@@ -188,9 +161,6 @@ public class GameActivity extends Activity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() { // Botón salir
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(pregunta.getTipo()==2) { // Hay música
-                            destruirMediaPlayer(); // Finalizar y liberar música
-                        }
                         finalizarPartida(); // Se finaliza la partida
                     }
                 })
@@ -201,10 +171,7 @@ public class GameActivity extends Activity {
 
     // Método llamado al pulsar un botón de respuesta
     private void elegirRespuesta(int id) {
-        if(pregunta.getTipo()==2) { // Hay música
-            destruirMediaPlayer(); // Finalizar y liberar música
-        }
-        if(pregunta.getRespuestaCorrecta()==id) { // Acierto
+        if(pregunta.getRespuestaCorrecta() == id) { // Acierto
             // Se colorea el botón de verde
             switch(id) {
                 case 0:
@@ -253,30 +220,13 @@ public class GameActivity extends Activity {
         }
     }
 
-    // Método llamado al pulsar en play
-    private void playMusic() {
-        mediaPlayer.start(); // Se vuelve a reproducir
-        pause.setEnabled(true); // Se habilita el botón de pause
-        play.setEnabled(false); // Se deshabilita el botón de play
-    }
-
-    // Método llamado al pulsar en pause
-    private void pauseMusic() {
-        mediaPlayer.pause(); // Se para
-        play.setEnabled(true); // Se habilita el botón de play
-        pause.setEnabled(false); // Se deshabilita el botón de pause
-    }
-
-    // Método llamado al pulsar en stop
-    private void stopMusic() {
-        mediaPlayer.seekTo(0); // Se vuelve al principio
-        mediaPlayer.start(); // Se inicia
-        pause.setEnabled(true); // Se habilita el botón de pause
-        play.setEnabled(false); // Se deshabilita el botón de play
-    }
-
     // Método para actualizar la actividad cada vez que se cambia de pregunta
     private void actualizarVistas() {
+        // Vidas
+        if(modo == 1) {
+            nVidas.setText(Integer.toString(vidas));
+        }
+
         // Se da el estilo de botón predeterminado a todos los botones
         option0.setBackgroundResource(R.drawable.btn_default);
         option0.setTextColor(getResources().getColor(R.color.buttonTextColor));
@@ -289,29 +239,11 @@ public class GameActivity extends Activity {
 
         // Se cargan la imagen y el RelativeLayout donde se encuentran los controles de la música
         ImageView image = (ImageView) findViewById(R.id.image);
-        RelativeLayout music = (RelativeLayout) findViewById(R.id.music);
 
-        if(this.pregunta.getTipo() == 0 || this.pregunta.getTipo() == 1) { // Si la pregunta es básica o con imagen se carga esta
-            music.setVisibility(View.GONE); // Los controles de la música desaparecen
-            image.setVisibility(View.VISIBLE); // La imagen se hace visible
-            if (this.pregunta.getTipo() == 1) { // Si es tipo pregunta con imagen se carga el recurso
-                image.setImageResource(getImageId(this, this.pregunta.getRecurso()));
-            } else { // en caso contrario se carga la imagen genérica
-                image.setImageResource(R.drawable.generic_question);
-            }
-        } else { // Si la pregunta es de música
-            image.setVisibility(View.GONE); // La imagen desaparece
-            music.setVisibility(View.VISIBLE); // Los controles de música se hacen visibles
-            mediaPlayer = MediaPlayer.create(this, getSongId(this, this.pregunta.getRecurso())); // Se crea el media player
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            mediaPlayer.setLooping(true); // Se habilita el Looping para que se repita
-            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp) { // Cuando esté preparado se inicia
-                        mp.start();
-                }
-            });
-            play.setEnabled(false); // Se deshabilita el botón play, pues actualmente está sonando
+        if (this.pregunta.getTipo() == 1) { // Si es modo pregunta con imagen se carga el recurso
+            image.setImageResource(getImageId(this, this.pregunta.getRecurso()));
+        } else { // en caso contrario se carga la imagen genérica
+            image.setImageResource(R.drawable.generic_question);
         }
 
         // Se carga la pregunta y se le da el texto correspondiente
@@ -361,6 +293,9 @@ public class GameActivity extends Activity {
         // Se actualizan las variables correspondientes
         fallos++;
         id++;
+        if (modo == 1) {
+            vidas--;
+        }
 
         // String auxiliares que se mostrarán en el mensaje
         String successMessage = getString(R.string.num_success) + aciertos;
@@ -382,7 +317,7 @@ public class GameActivity extends Activity {
                 .setPositiveButton(R.string.continue_game, new DialogInterface.OnClickListener() { // Botón continuar
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (id == limite) { // Se ha respondido todas las preguntas
+                        if (id == limite || (modo == 1 && vidas < 0)) { // Se ha respondido todas las preguntas
                             juegoCompletado();
                         } else { // Se pasa a la siguiente pregunta
                             siguientePregunta();
@@ -427,20 +362,8 @@ public class GameActivity extends Activity {
         finish();
     }
 
-    // Método que destruye el mediaPlayer
-    private void destruirMediaPlayer() {
-        mediaPlayer.stop();
-        mediaPlayer.reset();
-        mediaPlayer.release();
-    }
-
     // Método para obtener el id de un recurso en forma de imagen a partir de un String
     private int getImageId(Context context, String imageName) {
         return context.getResources().getIdentifier("drawable/" + imageName, null, context.getPackageName());
-    }
-
-    // Método para obtener el id de un recurso en forma de sonido a partir de un String
-    private int getSongId(Context context, String songName) {
-        return context.getResources().getIdentifier("raw/" + songName, null, context.getPackageName());
     }
 }

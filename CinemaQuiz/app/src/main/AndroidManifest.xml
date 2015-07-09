@@ -29,11 +29,6 @@
             android:screenOrientation="portrait"
             android:label="@string/title_activity_results" >
         </activity>
-        <activity
-            android:name="com.hijosdevuctir.cinemaquiz.OtherGamesActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_other_games" >
-        </activity>
     </application>
 
 </manifest>

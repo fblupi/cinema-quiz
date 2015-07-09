@@ -1,5 +1,4 @@
 ﻿cine;¿Cuál de estos nombres corresponde al agujero negro de la imagen?;Gargantúa;Gargántula;Garganta;Gargantilla;1;gargantua;
-cine;¿En qué película podemos escuchar este silbido?;Kill Bill;Reservoir Dogs;Django desencadenado;Malditos bastardos;2;twisted_nerve;
 cine;¿En qué película podemos ver esta nave espacial?;Star Wars;Star Trek;Interstellar;2001: Una odisea del espacio;1;destructor_imperial;
 cine;¿Quién interpretó a Mike Shiner en Birdman?;Edward Norton;Michael Keaton;Leonardo DiCaprio;Brad Pitt;0;null;
 cine;¿Quién dirigió El club de la lucha?;David Fincher;Edward Norton;Christopher Nolan;Frank Darabont;0;null;
@@ -10,9 +9,7 @@ cine;¿Qué físico aparece en El truco final?;Nikola Tesla;Albert Einstein;Thom
 cine;¿Qué deporte practican en Million Dollar Baby?;Boxeo;Lucha libre;Taekwondo;Karate;0;null;
 cine;¿En qué película podemos ver esta imagen?;Forrest Gump;La chaqueta metálica;Apocalypse Now;Salvar al soldado Ryan;1;bubba;
 cine;¿Qué película ganó el Goya a la mejor película en el año 2015?;La isla mínima;El niño;Celda 211;Lo imposible;0;null;
-cine;¿En qué película escuchamos esta banda sonora?;Parque jurásico;Indiana Jones;El señor de los anillos;Star Wars;2;parque_jurasico;
 cine;¿En cuál de estas películas no aparece David Bowie?;Road Trip;Dentro del laberinto;Basquiat;El truco final;0;null;
-cine;¿En qué película podemos escuchar esta canción?;Reservoir Dogs;Pulp Fiction;Los hombres de negro;Kill Bill;2;little_green_bag;
 cine;¿Quién es el director de Primos?;Daniel Sánchez Arévalo;Alejandro Amenábar;Alberto Rodríguez;Daniel Monzón;0;null;
 cine;¿Quién coprotagoniza con Luis Tosar La flaqueza del Bolchevique?;María Valverde;Belén Rueda;Inma Cuesta;Clara Lago;0;null;
 cine;¿Qué profesión ejerce el personaje que interpreta Ben Stiller en Más que amigos?;Rabino;Cura;Panadero;Repartidor de pizzas;0;null;
@@ -21,8 +18,6 @@ cine;¿Quién se acaba convirtiendo en periodista de guerra en La chaqueta metá
 cine;¿Quién dirigió Oldboy?;Park Chan-wook;Cho Young-wuk;Chun Chung-hoon;Kim ki-duk;0;null;
 cine;¿En qué película podemos ver esta imagen de Travolta bailando?;Pulp Fiction;Grease;Fiebre del sábado noche;Cerdos salvajes;1;travolta_dancing;
 cine;¿A qué película corresponde esta imagen?;Cadena perpetua;Como dios;Sigo como dios;Invictus;1;robbins_freeman;
-cine;¿En qué película podemos escuchar esta canción?;La flaqueza del bolchevique;Mar adentro;Hablé con ella;Los lunes al sol;2;standby;
-cine;¿En qué película escuchamos esta banda sonora?;Origen;Interstellar;Rush;El caballero oscuro;2;time;
 cine;¿Cuál de los siguientes no es un enanito en la película Blancanieves y los siete enanitos?;Cascarrabias;Timido;Mocoso;Dormilón;0;null;
 cine;¿Qué es Stitch de la película Lilo y Stitch?;Un alienígena;Un koala;Un mono;Una niña;0;null;
 cine;¿Cuál de los siguientes titanes no aparece en la película Hércules?;Titán de agua;Titán de roca;Titán de lava;Titán de hielo;0;null;
@@ -92,7 +87,7 @@ cine;¿Cuántos Óscar ganó El Padrino?;3;4;5;6;0;null;
 cine;¿Cuántos Óscar ganó El Padrino: Parte II?;6;4;5;7;0;null;
 cine;¿Cuál de estas películas ganó más Óscar?;Gravity;El Padrino;Forrest Gump;Braveheart;0;null;
 cine;¿Cuál de estas películas ganó más Óscar?;Slumdog Millionaire;La lista de Schindler;Gladiator;Star Wars: Una nueva esperanza;0;null;
-cine;¿Cuál fue la primera película de Disney?;Blancanieves y los siete enanitos;Pinocho;Dumo;Bambi;0;null;
+cine;¿Cuál fue la primera película de Disney?;Blancanieves y los siete enanitos;Pinocho;Dumbo;Bambi;0;null;
 cine;¿Cuándo se celebró la primera ceremonia de entrega de los premios Óscar?;1929;1926;1932;1920;0;null;
 cine;¿Cuándo se proyectó la primera película de la historia?;1895;1885;1905;1875;0;null;
 cine;¿Dónde se proyectó la primera película de la historia?;Francia;Reino Unido;Estados Unidos;Italia;0;null;

@@ -5,7 +5,8 @@
     <string name="title_activity_results">Resultados</string>
     <string name="title_activity_other_games">Otros juegos</string>
     <string name="title_activity_game">Juego</string>
-    <string name="new_game">Nueva partida</string>
+    <string name="new_game">Modo arcade</string>
+    <string name="new_extreme_game">Modo extremo</string>
     <string name="results">Resultados</string>
     <string name="other_games">Otros juegos</string>
     <string name="action_settings">Opciones</string>
@@ -30,12 +31,16 @@
     <string name="delete_results_message">¿Estás seguro que quieres eliminar los resultados?</string>
     <string name="no_results">No hay ningún resultado guardado</string>
     <string name="question_readjustment">Número de preguntas reajustado</string>
+    <string name="time">Tiempo:\t</string>
+    <string name="lifes">Vidas:\t</string>
+    <string name="extreme_game_title">Modo extremo</string>
+    <string name="extreme_game_description">¿Cuántas preguntas eres capaz de responder si te damos 5 vidas?</string>
 
     <string-array name="game_selection">
-        <item>50</item>
-        <item>40</item>
-        <item>30</item>
-        <item>20</item>
         <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
     </string-array>
 </resources>

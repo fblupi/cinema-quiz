@@ -15,7 +15,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "preguntas.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public static DBHelper getInstance(Context context) {
         if(instance == null) {
