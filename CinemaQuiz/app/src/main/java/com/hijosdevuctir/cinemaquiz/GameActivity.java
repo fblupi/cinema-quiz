@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import java.util.Date;
 
 public class GameActivity extends Activity {
@@ -161,18 +163,19 @@ public class GameActivity extends Activity {
         String errorsMessage = getString(R.string.num_errors) + fallos;
 
         // Se muestra un AlertDialog con los resultados finales y un botón para volver al menu principal
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.exit_game)
-                .setMessage(areYouSureMessage + "\n\n" + successMessage + "\n" + errorsMessage) // Mensaje de despedida con los aciertos y fallos que se llevan
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() { // Botón salir
+        new MaterialDialog.Builder(this)
+                .title(R.string.exit_game)
+                .content(areYouSureMessage + "\n\n" + successMessage + "\n" + errorsMessage) // Mensaje de despedida con los aciertos y fallos que se llevan
+                .callback(new MaterialDialog.ButtonCallback() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onPositive(MaterialDialog dialog) {
                         cronometro.cancel();
                         finalizarPartida(); // Se finaliza la partida
                     }
                 })
-                .setNegativeButton(R.string.no, null)
-                .setCancelable(false) // Pulsar fuera del AlertDialog no lo desactiva
+                .positiveText(R.string.yes)
+                .negativeText(R.string.no)
+                .cancelable(false) // Pulsar fuera del AlertDialog no lo desactiva
                 .show();
     }
 
@@ -263,6 +266,7 @@ public class GameActivity extends Activity {
         option2.setText(this.pregunta.getRespuesta(2));
         option3.setText(this.pregunta.getRespuesta(3));
 
+        nTiempo.setTextColor(getResources().getColor(R.color.buttonTextColor));
         // Se genera la cuenta atrás
         cuentaAtras();
     }
@@ -281,12 +285,12 @@ public class GameActivity extends Activity {
         soundPool.play(spAciertoId, 0.25f, 0.25f, 1, 0, 1);
 
         // Se muestra un AlertDialog con los resultados parciales y un botón para continuar
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.success_message)
-                .setMessage(successMessage + "\n" + errorsMessage) // Mensaje con los aciertos y fallos que se llevan
-                .setPositiveButton(R.string.continue_game, new DialogInterface.OnClickListener() { // Botón continuar
+        new MaterialDialog.Builder(this)
+                .title(R.string.success_message)
+                .content(successMessage + "\n" + errorsMessage) // Mensaje con los aciertos y fallos que se llevan
+                .callback(new MaterialDialog.ButtonCallback() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onPositive(MaterialDialog dialog) {
                         if (id == limite) { // Se ha respondido todas las preguntas
                             juegoCompletado();
                         } else { // Se pasa a la siguiente pregunta
@@ -294,9 +298,11 @@ public class GameActivity extends Activity {
                         }
                     }
                 })
-                .setCancelable(false) // Pulsar fuera del AlertDialog no lo desactiva
+                .positiveText(R.string.continue_game)
+                .cancelable(false) // Pulsar fuera del AlertDialog no lo desactiva
                 .show();
     }
+
 
     // Método que se activa cuando la respuesta pulsada es correcta
     private void respuestaIncorrecta() {
@@ -315,26 +321,27 @@ public class GameActivity extends Activity {
         soundPool.play(spFalloId, 0.25f, 0.25f, 1, 0, 1);
 
         // Se muestra un AlertDialog con los resultados parciales y un botón para continuar
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.error_message)
-                .setMessage(successMessage + "\n" + errorsMessage) // Mensaje con los aciertos y fallos que se llevan
-                .setNegativeButton(R.string.exit_game, new DialogInterface.OnClickListener() { // Botón salir
+        new MaterialDialog.Builder(this)
+                .title(R.string.error_message)
+                .content(successMessage + "\n" + errorsMessage) // Mensaje con los aciertos y fallos que se llevan
+                .callback(new MaterialDialog.ButtonCallback() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finalizarPartida(); // finaliza la partida
-                    }
-                })
-                .setPositiveButton(R.string.continue_game, new DialogInterface.OnClickListener() { // Botón continuar
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onPositive(MaterialDialog dialog) {
                         if (id == limite || (modo == 1 && vidas < 0)) { // Se ha respondido todas las preguntas
                             juegoCompletado();
                         } else { // Se pasa a la siguiente pregunta
                             siguientePregunta();
                         }
                     }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        finalizarPartida();
+                    }
                 })
-                .setCancelable(false) // Pulsar fuera del AlertDialog no lo desactiva
+                .positiveText(R.string.continue_game)
+                .negativeText(R.string.exit_game)
+                .cancelable(false) // Pulsar fuera del AlertDialog no lo desactiva
                 .show();
     }
 
@@ -345,17 +352,17 @@ public class GameActivity extends Activity {
         String successMessage = getString(R.string.num_success) + aciertos;
         String errorsMessage = getString(R.string.num_errors) + fallos;
 
-        // Se muestra un AlertDialog con los resultados finales y un botón para volver al menu principal
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.finish_title)
-                .setMessage(finishMessage + "\n\n" + successMessage + "\n" + errorsMessage) // Mensaje de despedida con los aciertos y fallos que se llevan
-                .setPositiveButton(R.string.exit_game, new DialogInterface.OnClickListener() { // Botón salir
+        new MaterialDialog.Builder(this)
+                .title(R.string.finish_title)
+                .content(finishMessage + "\n\n" + successMessage + "\n" + errorsMessage) // Mensaje de despedida con los aciertos y fallos que se llevan
+                .callback(new MaterialDialog.ButtonCallback() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onPositive(MaterialDialog dialog) {
                         finalizarPartida(); // Se finaliza la partida
                     }
                 })
-                .setCancelable(false) // Pulsar fuera del AlertDialog no lo desactiva
+                .positiveText(R.string.exit_game)
+                .cancelable(false) // Pulsar fuera del AlertDialog no lo desactiva
                 .show();
     }
 
@@ -382,6 +389,9 @@ public class GameActivity extends Activity {
             @Override
             public void onTick(long millisUntilFinished) {
                 nTiempo.setText(Long.toString(millisUntilFinished/1000));
+                if(millisUntilFinished < 6000) {
+                    nTiempo.setTextColor(getResources().getColor(R.color.buttonErrorColor));
+                }
             }
             @Override
             public void onFinish() {

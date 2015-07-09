@@ -63,7 +63,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:id="@+id/image"
-            android:src="@drawable/gargantua" />
+            android:src="@drawable/generic_question" />
 
     </LinearLayout>
 
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/buttonTextColor"
-                android:text="¿Cuál de estos nombres corresponde al agujero negro de la imagen?"
+                android:text="¿Cuál de estas cuatro respuestas es la correcta para esta pregunta?"
                 android:id="@+id/question"
                 android:layout_gravity="center_horizontal"/>
         </ScrollView>
@@ -101,25 +101,25 @@
         android:layout_weight="8"
         android:padding="@dimen/layout_padding">
         <Button
-            android:text="Gargántula"
+            android:text="Respuesta 1"
             android:id="@+id/option0"
             android:layout_gravity="center_horizontal"
             style="@style/Buttons"/>
 
         <Button
-            android:text="Gargantúa"
+            android:text="Respuesta 2"
             android:id="@+id/option1"
             android:layout_gravity="center_horizontal"
             style="@style/Buttons"/>
 
         <Button
-            android:text="Garganta"
+            android:text="Respuesta 3"
             android:id="@+id/option2"
             android:layout_gravity="center_horizontal"
             style="@style/Buttons"/>
 
         <Button
-            android:text="Gargantilla"
+            android:text="Respuesta 4"
             android:id="@+id/option3"
             android:layout_gravity="center_horizontal"
             style="@style/Buttons" />

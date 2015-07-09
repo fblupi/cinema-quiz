@@ -11,6 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.afollestad.materialdialogs.AlertDialogWrapper;
+import com.afollestad.materialdialogs.MaterialDialog;
+
 
 public class MainActivity extends Activity {
 
@@ -65,44 +68,40 @@ public class MainActivity extends Activity {
     }
 
     private void lanzarJuego() {
-        final Spinner spinner = new Spinner(this); // Se cre un spinner
-        final int pad = this.getResources().getDimensionPixelSize(R.dimen.layout_padding);
-        spinner.setPadding(pad, pad, pad, pad); // Se le asigna el padding por defecto de la aplicación
-        ArrayAdapter<CharSequence> adp = ArrayAdapter.createFromResource(this, R.array.game_selection, android.R.layout.simple_list_item_1);
-        spinner.setAdapter(adp); // Se le asignan al spinner los valores guardados en el string-array game_selection
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.question_num_selection)
-                .setMessage(R.string.question_num_selection_message)
-                .setView(spinner)
-                .setPositiveButton(R.string.continue_game, new DialogInterface.OnClickListener() {
+        new MaterialDialog.Builder(this)
+                .title(R.string.question_num_selection)
+                .content(R.string.question_num_selection_message)
+                .items(R.array.game_selection)
+                .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) { // Cuando se pulsa en continuar
-                        int num = Integer.parseInt(spinner.getSelectedItem().toString()); // Se obtiene el valor selecionado
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        int num = Integer.parseInt(text.toString()); // Se obtiene el valor selecionado
                         Intent intent = new Intent(MainActivity.this, GameActivity.class);
                         intent.putExtra("num", num); // Se le pasa a la siguiente actividad
                         intent.putExtra("mod", 0); // Se asigna la modalidad
                         startActivity(intent); // Se inicia la actividad
                     }
                 })
-                .setNegativeButton(R.string.cancel, null)
-                .setCancelable(false)
+                .negativeText(R.string.cancel)
+                .cancelable(false)
                 .show();
     }
 
     private void lanzarJuegoExtremo() {
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.extreme_game_title)
-                .setMessage(R.string.extreme_game_description)
-                .setPositiveButton(R.string.continue_game, new DialogInterface.OnClickListener() {
+        new MaterialDialog.Builder(this)
+                .title(R.string.extreme_game_title)
+                .content(R.string.extreme_game_description)
+                .callback(new MaterialDialog.ButtonCallback() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) { // Cuando se pulsa en continuar
+                    public void onPositive(MaterialDialog dialog) {
                         Intent intent = new Intent(MainActivity.this, GameActivity.class);
                         intent.putExtra("mod", 1); // Se asigna la modalidad
                         startActivity(intent); // Se inicia la actividad
                     }
                 })
-                .setNegativeButton(R.string.cancel, null)
-                .setCancelable(false)
+                .positiveText(R.string.continue_game)
+                .negativeText(R.string.cancel)
+                .cancelable(false)
                 .show();
     }
 

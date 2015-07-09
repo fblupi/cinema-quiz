@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import java.util.Vector;
 
 
@@ -53,18 +55,19 @@ public class ResultsActivity extends Activity {
     }
 
     private void eliminarResultados() {
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.delete_results)
-                .setMessage(R.string.delete_results_message) // Mensaje con los aciertos y fallos que se llevan
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() { // Botón continuar
+        new MaterialDialog.Builder(this)
+                .title(R.string.delete_results)
+                .content(R.string.delete_results_message) // Mensaje con los aciertos y fallos que se llevan
+                .callback(new MaterialDialog.ButtonCallback() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onPositive(MaterialDialog dialog) {
                         puntuaciones.borrarPuntuaciones(); // Se borran las puntuaciones
                         finish(); // Se vuelve al menú principal
                     }
                 })
-                .setNegativeButton(R.string.no,null)
-                .setCancelable(false) // Pulsar fuera del AlertDialog no lo desactiva
+                .positiveText(R.string.yes)
+                .negativeText(R.string.no)
+                .cancelable(false)
                 .show();
     }
 
