@@ -9,6 +9,7 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
@@ -25,15 +26,16 @@ public class GameActivity extends Activity {
     private int fallos; // número de fallos
     private int id; // id de la pregunta actual
     private int limite; // número de preguntas que se responderán
-    private int vidas;
+    private int vidas; // número de vidas
     private int modo; // modo de juego (0 normal, 1 con vidas)
     private Pregunta pregunta; // pregunta actual
-    private TextView nTiempo;
-    private TextView nVidas;
+    private TextView nTiempo; // TextView con el tiempo restante
+    private TextView nVidas; // TextView con el número de vidas
     private Button option0; // Botón primera opción
     private Button option1; // Botón segunda opción
     private Button option2; // Botón tercera opción
     private Button option3; // Botón cuarta opción
+    private CountDownTimer cronometro; // Cronómetro con la cuenta atrás
     private SoundPool soundPool; // Sonido de acierto o fallo
     private int spAciertoId; // Identificador de sonido de acierto
     private int spFalloId; // Identificador de sonido de fallo
@@ -107,6 +109,7 @@ public class GameActivity extends Activity {
                     return;
                 }
                 mLastClickTime = SystemClock.elapsedRealtime(); // Se actualiza la última pulsación
+                cronometro.cancel();
                 elegirRespuesta(0);
             }
         });
@@ -118,6 +121,7 @@ public class GameActivity extends Activity {
                     return;
                 }
                 mLastClickTime = SystemClock.elapsedRealtime(); // Se actualiza la última pulsación
+                cronometro.cancel();
                 elegirRespuesta(1);
             }
         });
@@ -129,6 +133,7 @@ public class GameActivity extends Activity {
                     return;
                 }
                 mLastClickTime = SystemClock.elapsedRealtime(); // Se actualiza la última pulsación
+                cronometro.cancel();
                 elegirRespuesta(2);
             }
         });
@@ -140,6 +145,7 @@ public class GameActivity extends Activity {
                     return;
                 }
                 mLastClickTime = SystemClock.elapsedRealtime(); // Se actualiza la última pulsación
+                cronometro.cancel();
                 elegirRespuesta(3);
             }
         });
@@ -161,6 +167,7 @@ public class GameActivity extends Activity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() { // Botón salir
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        cronometro.cancel();
                         finalizarPartida(); // Se finaliza la partida
                     }
                 })
@@ -255,6 +262,9 @@ public class GameActivity extends Activity {
         option1.setText(this.pregunta.getRespuesta(1));
         option2.setText(this.pregunta.getRespuesta(2));
         option3.setText(this.pregunta.getRespuesta(3));
+
+        // Se genera la cuenta atrás
+        cuentaAtras();
     }
 
     // Método que se activa cuando la respuesta pulsada es correcta
@@ -358,12 +368,25 @@ public class GameActivity extends Activity {
 
     // Método que se activa cuando se finaliza la partida
     private void finalizarPartida() {
-        results.guardarPuntuacion(new Date(),aciertos,fallos);
+        results.guardarPuntuacion(new Date(), aciertos, fallos);
         finish();
     }
 
     // Método para obtener el id de un recurso en forma de imagen a partir de un String
     private int getImageId(Context context, String imageName) {
         return context.getResources().getIdentifier("drawable/" + imageName, null, context.getPackageName());
+    }
+
+    private void cuentaAtras() {
+        cronometro = new CountDownTimer(30000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                nTiempo.setText(Long.toString(millisUntilFinished/1000));
+            }
+            @Override
+            public void onFinish() {
+                respuestaIncorrecta();
+            }
+        }.start();
     }
 }
