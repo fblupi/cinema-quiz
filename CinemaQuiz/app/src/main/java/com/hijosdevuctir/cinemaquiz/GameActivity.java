@@ -280,6 +280,7 @@ public class GameActivity extends Activity {
         // String auxiliares que se mostrarán en el mensaje
         String successMessage = getString(R.string.num_success) + aciertos;
         String errorsMessage = getString(R.string.num_errors) + fallos;
+        String message = successMessage + "\n" + errorsMessage;
 
         // Sonido de acierto
         soundPool.play(spAciertoId, 0.25f, 0.25f, 1, 0, 1);
@@ -287,7 +288,7 @@ public class GameActivity extends Activity {
         // Se muestra un AlertDialog con los resultados parciales y un botón para continuar
         new MaterialDialog.Builder(this)
                 .title(R.string.success_message)
-                .content(successMessage + "\n" + errorsMessage) // Mensaje con los aciertos y fallos que se llevan
+                .content(message) // Mensaje con los aciertos y fallos que se llevan
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
@@ -316,6 +317,10 @@ public class GameActivity extends Activity {
         // String auxiliares que se mostrarán en el mensaje
         String successMessage = getString(R.string.num_success) + aciertos;
         String errorsMessage = getString(R.string.num_errors) + fallos;
+        String message = successMessage + "\n" + errorsMessage;
+        if(modo == 1 && vidas == 0) {
+            message = getString(R.string.warning_lifes) + "\n\n" + successMessage + "\n" + errorsMessage ;
+        }
 
         // Sonido de fallo
         soundPool.play(spFalloId, 0.25f, 0.25f, 1, 0, 1);
@@ -323,7 +328,7 @@ public class GameActivity extends Activity {
         // Se muestra un AlertDialog con los resultados parciales y un botón para continuar
         new MaterialDialog.Builder(this)
                 .title(R.string.error_message)
-                .content(successMessage + "\n" + errorsMessage) // Mensaje con los aciertos y fallos que se llevan
+                .content(message) // Mensaje con los aciertos y fallos que se llevan
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
@@ -349,12 +354,16 @@ public class GameActivity extends Activity {
     private void juegoCompletado() {
         // String auxiliares que se mostrarán en el mensaje
         String finishMessage = getString(R.string.finish_message);
+        if (modo == 1 && vidas < 0) {
+            finishMessage = getString(R.string.finish_message_no_lifes);
+        }
         String successMessage = getString(R.string.num_success) + aciertos;
         String errorsMessage = getString(R.string.num_errors) + fallos;
+        String message = finishMessage + "\n\n" + successMessage + "\n" + errorsMessage;
 
         new MaterialDialog.Builder(this)
                 .title(R.string.finish_title)
-                .content(finishMessage + "\n\n" + successMessage + "\n" + errorsMessage) // Mensaje de despedida con los aciertos y fallos que se llevan
+                .content(message) // Mensaje de despedida con los aciertos y fallos que se llevan
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {

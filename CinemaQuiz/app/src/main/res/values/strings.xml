@@ -22,8 +22,10 @@
     <string name="exit_game">Salir</string>
     <string name="num_success">Aciertos:\t</string>
     <string name="num_errors">Fallos:\t</string>
+    <string name="warning_lifes">No te quedan vidas. Si vuelves a fallar se terminará la partida.</string>
     <string name="finish_title">Fin de partida</string>
     <string name="finish_message">¡Felicidades! Has respondido todas las preguntas. Pulsa en el botón para volver al menú principal.</string>
+    <string name="finish_message_no_lifes">Lo siento. Has perdido todas las vidas. Pulsa en el botón para volver al menú principal.</string>
     <string name="exit_game_confirmation">¿Estás seguro que quieres salir de la partida?</string>
     <string name="question_num_selection">Número de preguntas</string>
     <string name="question_num_selection_message">¿Cuántas preguntas quieres responder?</string>
