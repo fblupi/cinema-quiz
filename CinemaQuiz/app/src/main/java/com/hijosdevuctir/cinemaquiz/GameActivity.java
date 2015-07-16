@@ -30,6 +30,7 @@ public class GameActivity extends Activity {
     private int id; // id de la pregunta actual
     private int limite; // número de preguntas que se responderán
     private int vidas; // número de vidas
+    private int maxVidas; //Las vidas con las que se empieza
     private int modo; // modo de juego (0 normal, 1 con vidas)
     private Pregunta pregunta; // pregunta actual
     private TextView nTiempo; // TextView con el tiempo restante
@@ -56,6 +57,7 @@ public class GameActivity extends Activity {
         nTiempo = (TextView) findViewById(R.id.nTime);
         nVidas = (TextView) findViewById(R.id.nLifes);
 
+        maxVidas=5;
         vidas = 5;
         modo = extras.getInt("mod");
 
@@ -234,9 +236,13 @@ public class GameActivity extends Activity {
     }
 
     private void actualizaCorazones(){
-        for(int i=0; i<vidas;i++){
+        LinearLayout lHearts = (LinearLayout) findViewById(R.id.heartsLayout);
 
+        //Se ponen invisibles los corazones perdidos
+        for(int i=vidas; i<maxVidas;i++){
+            lHearts.getChildAt(i).setVisibility(View.INVISIBLE);
         }
+
     }
 
     // Método para actualizar la actividad cada vez que se cambia de pregunta
@@ -244,6 +250,7 @@ public class GameActivity extends Activity {
         // Vidas
         if(modo == 1) {
             nVidas.setText(Integer.toString(vidas));
+            actualizaCorazones();
         }
 
         // Se da el estilo de botón predeterminado a todos los botones
