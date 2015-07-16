@@ -14,6 +14,7 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +63,8 @@ public class GameActivity extends Activity {
             limite = extras.getInt("num"); // Se recoge el parámetro con el límite de preguntas
             TextView tVidas = (TextView) findViewById(R.id.lifes);
             tVidas.setVisibility(View.GONE);
+            LinearLayout lHearts = (LinearLayout) findViewById(R.id.heartsLayout);
+            lHearts.setVisibility(View.GONE); //Se ocultan los corazones
             nVidas.setVisibility(View.GONE);
             if(limite > Preguntas.size() || limite < 1) { // Número incorrecto de preguntas
                 limite = Preguntas.size(); // Se juegan todas las preguntas
