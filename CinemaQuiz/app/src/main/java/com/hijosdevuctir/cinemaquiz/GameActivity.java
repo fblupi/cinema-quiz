@@ -327,9 +327,6 @@ public class GameActivity extends Activity {
         String successMessage = getString(R.string.num_success) + aciertos;
         String errorsMessage = getString(R.string.num_errors) + fallos;
         String message = successMessage + "\n" + errorsMessage;
-        if(modo == 1 && vidas == 0) {
-            message = getString(R.string.warning_lifes) + "\n\n" + successMessage + "\n" + errorsMessage ;
-        }
 
         // Sonido de fallo
         soundPool.play(spFalloId, 0.25f, 0.25f, 1, 0, 1);
@@ -341,7 +338,7 @@ public class GameActivity extends Activity {
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
-                        if (id == limite || (modo == 1 && vidas < 0)) { // Se ha respondido todas las preguntas
+                        if (id == limite || (modo == 1 && vidas < 1)) { // Se ha respondido todas las preguntas
                             juegoCompletado();
                         } else { // Se pasa a la siguiente pregunta
                             siguientePregunta();
@@ -363,7 +360,7 @@ public class GameActivity extends Activity {
     private void juegoCompletado() {
         // String auxiliares que se mostrarán en el mensaje
         String finishMessage = getString(R.string.finish_message);
-        if (modo == 1 && vidas < 0) {
+        if (modo == 1 && vidas < 1) {
             finishMessage = getString(R.string.finish_message_no_lifes);
         }
         String successMessage = getString(R.string.num_success) + aciertos;
