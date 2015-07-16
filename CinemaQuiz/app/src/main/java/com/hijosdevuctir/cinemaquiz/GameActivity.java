@@ -233,6 +233,12 @@ public class GameActivity extends Activity {
         }
     }
 
+    private void actualizaCorazones(){
+        for(int i=0; i<vidas;i++){
+
+        }
+    }
+
     // Método para actualizar la actividad cada vez que se cambia de pregunta
     private void actualizarVistas() {
         // Vidas

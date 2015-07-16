@@ -47,8 +47,9 @@
                 android:id="@+id/heart1"
                 android:src="@drawable/corazon_opt"
                 android:layout_weight="1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp" />
+                android:visibility="visible"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -56,8 +57,9 @@
                 android:id="@+id/heart2"
                 android:src="@drawable/corazon_opt"
                 android:layout_weight="1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp" />
+                android:visibility="visible"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -65,8 +67,9 @@
                 android:id="@+id/heart3"
                 android:src="@drawable/corazon_opt"
                 android:layout_weight="1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp" />
+                android:visibility="visible"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -74,8 +77,9 @@
                 android:id="@+id/heart4"
                 android:layout_weight="1"
                 android:src="@drawable/corazon_opt"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp" />
+                android:visibility="visible"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -83,8 +87,9 @@
                 android:id="@+id/heart5"
                 android:layout_weight="1"
                 android:src="@drawable/corazon_opt"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp" />
+                android:visibility="visible"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp" />
 
         </LinearLayout>
 
