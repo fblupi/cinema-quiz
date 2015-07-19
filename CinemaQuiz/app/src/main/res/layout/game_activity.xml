@@ -12,34 +12,15 @@
         android:layout_weight="1"
         android:padding="@dimen/layout_padding_ultra_narrow">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/lifes"
-            android:id="@+id/lifes"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="5"
-            android:id="@+id/nLifes"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/lifes"
-            android:textColor="@color/buttonTextColor"/>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left|center"
             android:measureWithLargestChild="false"
-            android:layout_alignBottom="@+id/nLifes"
-            android:layout_toEndOf="@+id/nLifes"
-            android:id="@+id/heartsLayout">
+            android:id="@+id/heartsLayout"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp">
 
             <ImageView
                 android:layout_width="0dp"

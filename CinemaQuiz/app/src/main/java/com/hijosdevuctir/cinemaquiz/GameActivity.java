@@ -34,7 +34,6 @@ public class GameActivity extends Activity {
     private int modo; // modo de juego (0 normal, 1 con vidas)
     private Pregunta pregunta; // pregunta actual
     private TextView nTiempo; // TextView con el tiempo restante
-    private TextView nVidas; // TextView con el número de vidas
     private Button option0; // Botón primera opción
     private Button option1; // Botón segunda opción
     private Button option2; // Botón tercera opción
@@ -53,9 +52,9 @@ public class GameActivity extends Activity {
         setContentView(R.layout.game_activity);
         Bundle extras = getIntent().getExtras(); // Se obtienen los parámetros recibidos
 
-        // Se busca el texto de tiempo y vidas
+        // Se busca el texto de tiempo
         nTiempo = (TextView) findViewById(R.id.nTime);
-        nVidas = (TextView) findViewById(R.id.nLifes);
+
 
         maxVidas=5;
         vidas = 5;
@@ -63,11 +62,8 @@ public class GameActivity extends Activity {
 
         if(modo == 0) {
             limite = extras.getInt("num"); // Se recoge el parámetro con el límite de preguntas
-            TextView tVidas = (TextView) findViewById(R.id.lifes);
-            tVidas.setVisibility(View.GONE);
             LinearLayout lHearts = (LinearLayout) findViewById(R.id.heartsLayout);
             lHearts.setVisibility(View.GONE); //Se ocultan los corazones
-            nVidas.setVisibility(View.GONE);
             if(limite > Preguntas.size() || limite < 1) { // Número incorrecto de preguntas
                 limite = Preguntas.size(); // Se juegan todas las preguntas
                 Toast.makeText(this, R.string.question_readjustment, Toast.LENGTH_SHORT).show();
@@ -249,7 +245,6 @@ public class GameActivity extends Activity {
     private void actualizarVistas() {
         // Vidas
         if(modo == 1) {
-            nVidas.setText(Integer.toString(vidas));
             actualizaCorazones();
         }
 
