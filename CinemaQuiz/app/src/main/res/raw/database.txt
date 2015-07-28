@@ -30,7 +30,7 @@ cine;¿Con qué alimento mantiene relaciones sexuales Jim en la película Americ
 cine;¿En qué grupo político se quiere meter Brian en La vida de Brian?;Frente Popular de Judea;Frente del pueblo Judaico;Unión Popular;Frente Judaico Popular;0;null;
 cine;¿Cómo se llama el perro de Asterix y Obelix?;Ideafix;Milú;Matusalix;Panoramix;0;null;
 cine;¿Qué insecto protagoniza la película Bichos?;Una hormiga;Una oruga;Un insecto palo;Un saltamontes;0;null;
-cine;¿En qué país está ambientada la película Ciudad de Dios?;Brasil;Méjico;Argentina;Filipinas;0;null;
+cine;¿En qué país está ambientada la película Ciudad de Dios?;Brasil;México;Argentina;Filipinas;0;null;
 cine;¿Cómo se llama el cangrejo de La Sirenita?;Sebastián;Lobster;Roberto;Arturo;0;null;
 cine;¿En qué película podemos ver a este particular conejo?;Donnie Darko;Los conejitos de pascua;Space Jam;El conejo asesino;1;image007;
 cine;¿En qué película podemos ver a este personaje?;American History X;La lista de Schindler;El pianista;Malditos Bastardos;1;image008;
@@ -152,7 +152,7 @@ cine;¿De qué país es la pelicula Jackie Chan: Mi historia?;Hong Kong;China;EE
 cine;¿De qué país es la pelicula El último samurai?;EEUU;China;Japón;Reino Unido;0;null;
 cine;¿De qué país es el corto Un perro andaluz?;Francia;España;México;Argentina;0;null;
 cine;¿Quién colaboró con Luis Buñuel en el guión de Un perro andaluz?;Salvador Dalí;Federico García Lorca;Fernando Rey;Man Ray;0;null;
-cine;¿Qué figura hay en el premio de los MTV Moview Awards?;Una caja de palomitas;Un rollo de cinta de cine;Una cámara;Una claqueta;0;null;
+cine;¿Qué figura hay en el premio de los MTV Movie Awards?;Una caja de palomitas;Un rollo de cinta de cine;Una cámara;Una claqueta;0;null;
 cine;¿De qué país es Audrey Hepburn?;Bélgica;Reino Unido;EEUU;Holanda;0;null;
 cine;¿Qué profesión ejerce el personaje que interpreta Edward Norton en Más que amigos?;Cura;Rabino;Panadero;Repartidor de pizzas;0;null;
 cine;¿Qué es Bambi?;Un ciervo;Un corzo;Un reno;Un arce;0;null;
