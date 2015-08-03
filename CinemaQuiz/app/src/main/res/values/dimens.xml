@@ -7,7 +7,7 @@
     <dimen name="layout_padding">16dp</dimen>
     <dimen name="layout_padding_narrow">12dp</dimen>
     <dimen name="layout_padding_ultra_narrow">2dp</dimen>
-    <dimen name="layout_margin_results">12dp</dimen>
+    <dimen name="layout_margin_results">6dp</dimen>
     <dimen name="music_button_margin">12dp</dimen>
     <dimen name="main_image_height">96dp</dimen>
     <dimen name="main_image_margin">16dp</dimen>

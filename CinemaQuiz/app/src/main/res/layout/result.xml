@@ -7,12 +7,13 @@
         android:id="@+id/listFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fecha"
+        android:text="03-08-2015 14:11"
         android:layout_marginEnd="@dimen/layout_margin_results"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:singleLine="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textColor="@android:color/background_dark" />
 
     <TextView
         android:id="@+id/listAciertos"
@@ -20,44 +21,50 @@
         android:layout_height="wrap_content"
         android:text="@string/num_success"
         android:layout_marginStart="@dimen/layout_margin_results"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/background_dark" />
 
     <TextView
         android:id="@+id/listFallos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/num_errors"
         android:layout_below="@+id/listAciertos"
-        android:layout_alignStart="@+id/listAciertos" />
+        android:layout_alignStart="@+id/listAciertos"
+        android:textColor="@android:color/background_dark" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="96"
+        android:text="100"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/listNAciertos"
         android:layout_marginStart="@dimen/layout_margin_results"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/listAciertos" />
+        android:layout_toEndOf="@+id/listAciertos"
+        android:textColor="@android:color/holo_green_dark" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5"
+        android:text="50"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/listNFallos"
-        android:layout_above="@+id/listPorcentaje"
         android:layout_alignStart="@+id/listNAciertos"
-        android:layout_alignTop="@id/listFallos" />
+        android:layout_alignTop="@id/listFallos"
+        android:textColor="@android:color/holo_red_dark" />
 
-    <RatingBar
-        android:id="@+id/listPorcentaje"
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numStars="10"
-        style="?android:attr/ratingBarStyleSmall"
-        android:isIndicator="true"
-        android:rating="5"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/listFallos" />
+        android:id="@+id/listPorcentaje"
+        android:layout_alignBottom="@+id/listNFallos"
+        android:layout_alignStart="@+id/listFecha"
+        android:layout_alignEnd="@+id/listFecha"
+        android:progress="50"/>
+
 </RelativeLayout>
