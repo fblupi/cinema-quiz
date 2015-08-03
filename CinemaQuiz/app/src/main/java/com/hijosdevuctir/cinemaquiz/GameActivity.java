@@ -1,9 +1,7 @@
 package com.hijosdevuctir.cinemaquiz;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -25,6 +23,8 @@ import java.util.Date;
 public class GameActivity extends Activity {
     private static final long INTERVALO_CLICK = 1000;
 
+    private DBHelperResults db = DBHelperResults.getInstance(this); // Base de datos
+
     private int aciertos; // número de aciertos
     private int fallos; // número de fallos
     private int id; // id de la pregunta actual
@@ -43,7 +43,6 @@ public class GameActivity extends Activity {
     private int spAciertoId; // Identificador de sonido de acierto
     private int spFalloId; // Identificador de sonido de fallo
     private long mLastClickTime = 0; // Variable para controlar el tiempo entre pulsaciones
-    private Results results = Results.getInstance(this);
 
     // Método llamado al crear la actividad
     @Override
@@ -392,7 +391,7 @@ public class GameActivity extends Activity {
 
     // Método que se activa cuando se finaliza la partida
     private void finalizarPartida() {
-        results.guardarPuntuacion(new Date(), aciertos, fallos);
+        db.add(new Date(), aciertos, fallos);
         finish();
     }
 

@@ -1,8 +1,6 @@
 package com.hijosdevuctir.cinemaquiz;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,14 +9,15 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 
 public class ResultsActivity extends Activity {
 
-    private Results puntuaciones = Results.getInstance(this);
     private LinearLayout lista;
     private Button btn;
+
+    private DBHelperResults db = DBHelperResults.getInstance(this); // Base de datos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +37,11 @@ public class ResultsActivity extends Activity {
     }
 
     private void actualizarLista() {
-        Vector<String> listaPuntuaciones = puntuaciones.listaPuntuaciones();
+        ArrayList<Puntuacion> listaPuntuaciones = db.getAll();
         if(listaPuntuaciones.size() > 0) {
-            for (String puntuacion : listaPuntuaciones) {
+            for(Puntuacion puntuacion : listaPuntuaciones) {
                 TextView textView = new TextView(this);
-                textView.setText(puntuacion);
+                textView.setText(puntuacion.getFecha() + " " + puntuacion.getCorrectas() + " " + puntuacion.getFallidas() + " " + puntuacion.getPorcentaje());
                 textView.setTextAppearance(this, android.R.style.TextAppearance_Medium);
                 lista.addView(textView);
             }
@@ -61,7 +60,7 @@ public class ResultsActivity extends Activity {
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
-                        puntuaciones.borrarPuntuaciones(); // Se borran las puntuaciones
+                        db.clear(); // Se borran las puntuaciones
                         finish(); // Se vuelve al menú principal
                     }
                 })
