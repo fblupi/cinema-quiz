@@ -60,6 +60,35 @@ public class DBHelperResults extends SQLiteOpenHelper {
         db.close();
     }
 
+    public int getCount() {
+        int count;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        count = db.rawQuery("SELECT id FROM puntuaciones", null).getCount();
+        db.close();
+
+        return count;
+    }
+
+    public Puntuacion get(int i) {
+        Puntuacion resultado;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM puntuaciones", null);
+        c.moveToFirst();
+        for(int n = 0; n < i; n++) {
+            c.moveToNext();
+        }
+        resultado = new Puntuacion(
+                c.getString(1),
+                Integer.parseInt(c.getString(2)),
+                Integer.parseInt(c.getString(3)),
+                Integer.parseInt(c.getString(4)));
+        db.close();
+
+        return resultado;
+    }
+
     public ArrayList<Puntuacion> getAll() {
         ArrayList<Puntuacion> puntuaciones = new ArrayList<Puntuacion>();
 
