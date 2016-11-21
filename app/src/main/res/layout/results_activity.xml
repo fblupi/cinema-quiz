@@ -1,0 +1,21 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/topPuntuaciones"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_results"
+        android:id="@+id/deleteResults"
+        android:layout_gravity="right"
+        style="@style/Buttons.Small"/>
+    <ListView
+        android:id="@+id/listPuntuaciones"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:drawSelectorOnTop="false"/>
+</LinearLayout>
